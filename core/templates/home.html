@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Assignment Workflow Steps</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        background: linear-gradient(135deg, #0f172a, #1e293b);
+        color: #e2e8f0;
+      }
+
+      header {
+        text-align: center;
+        padding: 40px 20px;
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(10px);
+      }
+
+      header h1 {
+        margin: 0;
+        font-size: 2.2rem;
+        color: #38bdf8;
+      }
+
+      header p {
+        margin-top: 10px;
+        color: #cbd5e1;
+      }
+
+      .container {
+        max-width: 1000px;
+        margin: auto;
+        padding: 40px 20px;
+      }
+
+      .step {
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 12px;
+        padding: 20px;
+        margin-bottom: 20px;
+        transition: transform 0.2s ease;
+      }
+
+      .step:hover {
+        transform: translateY(-5px);
+        border-color: #38bdf8;
+      }
+
+      .step h2 {
+        margin-top: 0;
+        color: #38bdf8;
+      }
+
+      .step p {
+        color: #e2e8f0;
+        line-height: 1.6;
+      }
+
+      pre {
+        background: #0b1220;
+        padding: 12px;
+        border-radius: 8px;
+        overflow-x: auto;
+        color: #a5f3fc;
+        font-size: 0.85rem;
+      }
+
+      .badge {
+        display: inline-block;
+        padding: 5px 10px;
+        background: #38bdf8;
+        color: #0f172a;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        margin-bottom: 10px;
+      }
+
+      footer {
+        text-align: center;
+        padding: 20px;
+        color: #94a3b8;
+        font-size: 0.9rem;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Assignment Workflow Documentation</h1>
+      <p>Django + Docker + CI/CD + Render Deployment Steps with Commands</p>
+    </header>
+
+    <div class="container">
+      <div class="step">
+        <span class="badge">Step 1</span>
+        <h2>Project Setup (Django)</h2>
+        <p>We created a Django project and app structure.</p>
+        <pre>
+django-admin startproject myproject
+cd myproject
+python manage.py startapp core
+python manage.py runserver</pre
+        >
+      </div>
+
+      <div class="step">
+        <span class="badge">Step 2</span>
+        <h2>Docker Setup</h2>
+        <p>We containerized the Django application using Docker.</p>
+        <pre>
+docker build -t django-app .
+docker run -p 8000:8000 django-app</pre
+        >
+
+        <p><b>Dockerfile used:</b></p>
+        <pre>
+FROM python:3.11
+WORKDIR /app
+COPY . /app
+RUN pip install -r requirements.txt
+CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]</pre
+        >
+      </div>
+
+      <div class="step">
+        <span class="badge">Step 3</span>
+        <h2>Git Version Control</h2>
+        <p>We tracked changes using Git and pushed to GitHub.</p>
+        <pre>
+git init
+git add .
+git commit -m "initial commit"
+git branch -M main
+git remote add origin https://github.com/user/repo.git
+git push -u origin main</pre
+        >
+      </div>
+
+      <div class="step">
+        <span class="badge">Step 4</span>
+        <h2>CI/CD Pipeline</h2>
+        <p>Automated build and deployment workflow.</p>
+        <pre>
+name: Django CI
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+      - name: Run tests
+        run: python manage.py test</pre
+        >
+      </div>
+
+      <div class="step">
+        <span class="badge">Step 5</span>
+        <h2>Deployment (Render)</h2>
+        <p>We deployed the project to Render cloud platform.</p>
+        <pre>
+Build Command: pip install -r requirements.txt
+Start Command: python manage.py runserver 0.0.0.0:8000</pre
+        >
+      </div>
+
+      <div class="step">
+        <span class="badge">Step 6</span>
+        <h2>Final Testing</h2>
+        <p>We tested the live deployment for routing, templates, and APIs.</p>
+        <pre>
+curl http://your-app.onrender.com
+# or open in browser</pre
+        >
+      </div>
+    </div>
+
+    <footer>
+      © 2026 Assignment Documentation | Built for learning purposes
+    </footer>
+  </body>
+</html>
